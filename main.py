@@ -12,7 +12,7 @@ target_names = iris.target_names
 # todo: Create Radix sort function (not sure how hard this is lol)
 # -------------------------------------------------------------------------------------------------------------------- #
 
-def testFunctionCalls():
+def test_function_calls():
     print("Feature Data: ")  # Flower measurements:
     print(feature_data[:5])                 # (sepal length, sepal width, petal length, petal width)
 
@@ -22,39 +22,39 @@ def testFunctionCalls():
     print("Feature name: ", feature_names)
 
     print("Target name: ", target_names)
-def printSpeciesData(feature, feature_data, label, target_names):  # pass these parameters so we can work with copys
-    print("#. Species, feature data")
+def print_species_data(feature, ffeature_data, flabel, ftarget_names):  # pass parameters so we can work with copies
+    print("#. Species, feature data")  # f prefix on all parameters means "function"
 
     n = len(feature_data)
     for x in range(n):
-        if label[x] == 0:
-            print(x + 1, "-", feature_data[x][feature], "cm", target_names[0])  # print based on species name
+        if flabel[x] == 0:
+            print(x + 1, "-", ffeature_data[x][feature], "cm", ftarget_names[0])  # print based on species name
 
-        elif label[x] == 1:
-            print(x + 1, "-", feature_data[x][feature], "cm", target_names[1])
+        elif flabel[x] == 1:
+            print(x + 1, "-", ffeature_data[x][feature], "cm", ftarget_names[1])
 
         else:
-            print(x + 1, "-", feature_data[x][feature], "cm", target_names[2])
+            print(x + 1, "-", ffeature_data[x][feature], "cm", ftarget_names[2])
 
-def swap(feature, feature_data, label, x, min_idx):
-    (feature_data[x][feature], feature_data[min_idx][feature]) = \
-        (feature_data[min_idx][feature], feature_data[x][feature])
-    (label[x], label[min_idx]) = (label[min_idx], label[x])
+def swap(feature, ffeature_data, flabel, x, min_idx):
+    (ffeature_data[x][feature], ffeature_data[min_idx][feature]) = \
+        (ffeature_data[min_idx][feature], ffeature_data[x][feature])
+    (flabel[x], flabel[min_idx]) = (flabel[min_idx], flabel[x])
 
-def selectionSort(feature, feature_data, label):
-    n = len(feature_data)
+def selection_sort(feature, ffeature_data, flabel):
+    n = len(ffeature_data)
     for x in range(n):
         min_idx = x
 
         for y in range(x + 1, n):
-            if (feature_data[y][feature] < feature_data[min_idx][feature]):  # sort by first feature (sepal length)
+            if ffeature_data[y][feature] < ffeature_data[min_idx][feature]:  # sort by first feature (sepal length)
                 min_idx = y  # change min to this new index
 
-        swap(feature, feature_data, label, x, min_idx)
+        swap(feature, ffeature_data, flabel, x, min_idx)
 
-def printMinMax_SLen(feature, feature_data):
-    n = len(feature_data)
-    print("min", feature_data[1][feature], "---->", feature_data[n - 1][feature], "max")
+def print_min_max(feature, ffeature_data):
+    n = len(ffeature_data)
+    print("min", ffeature_data[1][feature], "---->", ffeature_data[n - 1][feature], "max")
 
 feature_data_copy = feature_data.copy()  # create personal copy of data sets
 label_copy = label.copy()
@@ -62,8 +62,8 @@ label_copy = label.copy()
 # main
 featureValue = 3  # 0 = sepal length, 1 = sepal width, 2 = petal length, 3 = petal length
 
-selectionSort(featureValue, feature_data_copy, label_copy)
+selection_sort(featureValue, feature_data_copy, label_copy)
 
-printSpeciesData(featureValue, feature_data_copy, label_copy, target_names)
+print_species_data(featureValue, feature_data_copy, label_copy, target_names)
 
-printMinMax_SLen(featureValue, feature_data_copy)
+print_min_max(featureValue, feature_data_copy)
